@@ -3,84 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Inicio de Sesión</title>
+    <title>Login</title>
     <style>
-        /* Estilos CSS simplificados para asegurar la visibilidad */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px; /* Asegura que no está pegado al borde */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
         }
 
         .login-container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
-            text-align: center;
-            margin: 50px auto; /* Centra el contenedor horizontalmente */
+            background: white;
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
         }
 
-        /* El resto de estilos se mantienen igual */
-        h2 { color: #333; margin-bottom: 20px; }
-        .input-group { margin-bottom: 15px; text-align: left; }
-        .input-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
-        .input-group input[type="text"],
-        .input-group input[type="password"] {
-            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 40px;
+            font-size: 32px;
+            font-weight: 700;
         }
-        button {
-            background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px;
+
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
         }
-        button:hover { background-color: #0056b3; }
-        .error-message { color: red; margin-top: 10px; display: none; }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            background: #f0f0f0;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            background: #e8e8e8;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 8px;
+            cursor: pointer;
+            accent-color: #e91e63;
+        }
+
+        .remember-me label {
+            color: #999;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(90deg, #e91e63, #f06292);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(233, 30, 99, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 30px 0 20px;
+            color: #999;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #ddd;
+        }
+
+        .divider::before {
+            left: 0;
+        }
+
+        .divider::after {
+            right: 0;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .social-btn:hover {
+            background: #f8f8f8;
+        }
+
+        .social-btn.facebook {
+            color: #3b5998;
+        }
+
+        .social-btn.google {
+            color: #db4437;
+        }
+
+        .signup-link {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #e91e63;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
     </style>
 </head>
 <body>
-
-<div class="login-container">
-    <h2>👋 ¡Bienvenido/a!</h2>
-
-    <form id="loginForm">
-        <div class="input-group">
-            <label for="username">Usuario:</label>
-            <input type="text" id="username" name="username" required>
+    <div class="login-container">
+        <h1>LOGIN</h1>
+        
+        <div class="error-message" id="errorMessage">
+            Usuario o contraseña incorrectos
         </div>
 
-        <div class="input-group">
-            <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" required>
+        <form id="loginForm">
+            <div class="input-group">
+                <span class="i">📧</span>
+                <input type="text" id="username" placeholder="Usuario" required>
+            </div>
+
+            <div class="input-group">
+                <span class="i">🔒</span>
+                <input type="password" id="password" placeholder="Contraseña" required>
+            </div>
+
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+
+            <button type="submit" class="login-btn">LOGIN</button>
+        </form>
+
+        <div class="divider">Or login with</div>
+
+        <div class="social-login">
+            <button class="social-btn facebook">
+                <span>📘</span> Facebook
+            </button>
+            <button class="social-btn google">
+                <span>🔍</span> Google
+            </button>
         </div>
 
-        <button type="submit">Iniciar Sesión</button>
-    </form>
+        <div class="signup-link">
+            Not a member? <a href="#">Sign up now</a>
+        </div>
+    </div>
 
-    <p id="errorMessage" class="error-message">Usuario o contraseña incorrectos.</p>
-</div>
-
-<script>
-    // Lógica JavaScript
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
-
-        const userCorrecto = "criptolombia";
-        const passCorrecta = "123456";
-        const homepageURL = "homepage.html"; 
-
-        const usernameInput = document.getElementById('username').value;
-        const passwordInput = document.getElementById('password').value;
+    <script>
+        const loginForm = document.getElementById('loginForm');
         const errorMessage = document.getElementById('errorMessage');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
 
-        if (usernameInput === userCorrecto && passwordInput === passCorrecta) {
-            errorMessage.style.display = 'none'; 
-            window.location.href = homepageURL; 
-        } else {
-            errorMessage.style.display = 'block';
-        }
-    });
-</script>
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value;
+            const password = passwordInput.value;
 
+            // Validar credenciales
+            if (username === 'criptolombia' && password === '123456') {
+                // Login exitoso
+                errorMessage.style.display = 'none';
+                alert('¡Login exitoso! Redirigiendo...');
+                // Aquí redirigirías a la homepage cuando esté lista
+                // window.location.href = 'homepage.html';
+            } else {
+                // Mostrar mensaje de error
+                errorMessage.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+            }
+        });
+
+        // Ocultar mensaje de error cuando el usuario empiece a escribir
+        usernameInput.addEventListener('input', function() {
+            errorMessage.style.display = 'none';
+        });
+
+        passwordInput.addEventListener('input', function() {
+            errorMessage.style.display = 'none';
+        });
+    </script>
 </body>
 </html>
-
