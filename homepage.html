@@ -49,8 +49,9 @@
             color: #6a6a6a;
             margin-bottom: 5px;
         }
-
-        .balance {
+        
+        /* ID para identificar el balance y manipularlo con JS */
+        #mainBalance {
             font-size: 2.2em;
             font-weight: 700;
             color: #333;
@@ -78,6 +79,11 @@
             color: #037DD6; /* Color azul característico */
             font-size: 0.8em;
             font-weight: 600;
+            transition: opacity 0.2s;
+        }
+        
+        .action-button:hover {
+            opacity: 0.8;
         }
 
         .action-icon {
@@ -137,13 +143,13 @@
 
     <div class="account-info">
         <div class="account-name">Cuenta 1</div>
-        <div class="balance">5.876 ETH</div>
+        <div id="mainBalance">5.876 ETH</div>
         <div class="balance-fiat">~ $14,589.20 USD</div>
         <small style="color: #a0a0a0; font-size: 0.75em; cursor: pointer; display: block; margin-top: 8px;">0xAb58...24d8</small>
     </div>
 
     <div class="actions">
-        <a href="#" class="action-button">
+        <a href="#" class="action-button" onclick="handleReceive()">
             <div class="action-icon icon-receive"></div>
             <span>Recibir</span>
         </a>
@@ -176,6 +182,53 @@
     </div>
 
 </div>
+
+<script>
+    // Referencia al elemento del DOM que muestra el balance
+    const balanceElement = document.getElementById('mainBalance');
+    
+    // Función para extraer el valor numérico actual del balance (ej: 5.876)
+    function getCurrentBalance() {
+        // Obtenemos el texto, eliminamos ' ETH', reemplazamos la coma por punto para JS, y convertimos a número
+        let currentBalanceText = balanceElement.textContent.replace(' ETH', '').trim();
+        return parseFloat(currentBalanceText.replace(',', '.'));
+    }
+
+    // Función principal para manejar el evento de "Recibir"
+    function handleReceive() {
+        // 1. Abrir el input box (usando prompt para simplicidad)
+        const amountToAdd = prompt("Ingrese la cantidad de ETH que desea recibir:");
+        
+        // Verificar si el usuario ingresó algo y si es un número válido
+        if (amountToAdd === null || amountToAdd.trim() === "") {
+            alert("Operación cancelada.");
+            return;
+        }
+        
+        const newAmount = parseFloat(amountToAdd.replace(',', '.'));
+
+        if (isNaN(newAmount) || newAmount <= 0) {
+            alert("Por favor, ingrese una cantidad numérica positiva.");
+            return;
+        }
+
+        // 2. Obtener el balance actual
+        const currentBalance = getCurrentBalance();
+        
+        // 3. Calcular el nuevo balance
+        const updatedBalance = currentBalance + newAmount;
+        
+        // 4. Actualizar el DOM
+        // El toFixed(4) asegura que solo tenga 4 decimales, y luego lo formateamos con una coma si es necesario.
+        const formattedBalance = updatedBalance.toFixed(4).replace('.', ',');
+        
+        // Actualizamos el elemento de la billetera
+        balanceElement.textContent = `${formattedBalance} ETH`;
+        
+        alert(`¡Transacción exitosa! Se han añadido ${newAmount.toFixed(4)} ETH. Nuevo Balance: ${formattedBalance} ETH`);
+    }
+
+</script>
 
 </body>
 </html>
