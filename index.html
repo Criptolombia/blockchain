@@ -249,13 +249,15 @@
             const username = usernameInput.value;
             const password = passwordInput.value;
 
-            // Validar credenciales
+            // Credenciales de prueba
             if (username === 'criptolombia' && password === '123456') {
                 // Login exitoso
                 errorMessage.style.display = 'none';
-                alert('¡Login exitoso! Redirigiendo...');
-                // Aquí redirigirías a la homepage cuando esté lista
-                // window.location.href = 'homepage.html';
+                alert('¡Login exitoso! Redirigiendo a la billetera...');
+                
+                // ⭐ REDIRECCIÓN ACTIVADA ⭐
+                window.location.href = 'homepage.html'; 
+            
             } else {
                 // Mostrar mensaje de error
                 errorMessage.style.display = 'block';
@@ -273,11 +275,5 @@
             errorMessage.style.display = 'none';
         });
     </script>
-
-    <div class="header">
-    <a href="homepage.html" class="logo" style="color: white; text-decoration: none;">Mi Wallet</a>
-    <span>⚙️</span>
-    </div>
-    
 </body>
 </html>
