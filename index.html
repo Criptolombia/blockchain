@@ -249,17 +249,16 @@
             const username = usernameInput.value;
             const password = passwordInput.value;
 
-            // Credenciales de prueba
+            // Lógica de validación
             if (username === 'criptolombia' && password === '123456') {
-                // Login exitoso
+                // Login exitoso: Redirige a la página principal de la billetera
                 errorMessage.style.display = 'none';
-                alert('¡Login exitoso! Redirigiendo a la billetera...');
                 
-                // ⭐ REDIRECCIÓN ACTIVADA ⭐
+                // ⭐ REDIRECCIÓN A HOMEPAGE.HTML ⭐
                 window.location.href = 'homepage.html'; 
             
             } else {
-                // Mostrar mensaje de error
+                // Mostrar mensaje de error si las credenciales son incorrectas
                 errorMessage.style.display = 'block';
                 passwordInput.value = '';
                 passwordInput.focus();
